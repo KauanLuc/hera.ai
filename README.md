@@ -38,7 +38,7 @@ hera -p "Como tratar pragas em hortaliças?"
 
 Atualmente a aplicação só roda como modo desenvolvimento. Para testar a Hera em fase de desenvolvimento, você precisará:
 1. [Lua 5.3](https://www.lua.org/) instalado em seu sistema
-2. [Ollama](https://ollama.com/) instalado e configurado com o modelo gemma3
+2. [Ollama](https://ollama.com/) instalado e configurado com o modelo [gemma3:1b](https://ollama.com/library/gemma3:1b)
 3. [Neo4j](https://neo4j.com/) instalado e rodando
 
 Passos para configuração:
