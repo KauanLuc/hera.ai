@@ -25,31 +25,36 @@ cli:command('-p <prompt>', 'Faça uma pergunta sobre flora para a Hera')
     end)
 
 cli:command('add <plant_name>', cli_utils.add_description())
-:action(function(parsed, command, app)
-    local plant = string.lower(parsed.plant_name)
+    :action(function(parsed, command, app)
+        local data = {}
+        local plant = string.lower(parsed.plant_name)
 
-    print('Digite qual o contexto que o(a) '..plant..' vive:')
-    local context = string.lower(io.read())
-    
-    print('Digite quais são os cuidados diários com o(a) '..plant..':')
-    local daily_care = string.lower(io.read())
-    
-    print('Digite quais problemas o(a) '..plant..' tem:')
-    local problems = string.lower(io.read())
-    
-    local data = {
-        name = plant,
-        context = context,
-        daily_care = daily_care,
-        problems = problems
-    }
+        print('Digite qual o contexto que o(a) '..plant..' vive: (Ex: Apartamento, luz difusa indireta etc)')
+        local context = string.lower(io.read())
 
-    local response, err = neo4j_api.query(query_utils.add(), data)
+        print('Digite quais são os cuidados diários com o(a) '..plant..': (Ex: Rega 1x por dia, poda todo mês etc)')
+        local daily_care = string.lower(io.read())
+        
+        print('Digite quais problemas o(a) '..plant..' tem: (Digite "/sair" para finalizar)')
+        while true do
+            local problem = string.lower(io.read())
+            if problem == '/sair' then
+                break
+            end
 
-    if err then
-        print('Não foi possível adicionar a planta a base de dados. Erro: '..err)
-    end
-    print(plant..' adicionado(a) com sucesso')
-end)
+            table.insert(data, problem)
+        end
+        
+        data.name = plant
+        data.context = context
+        data.daily_care = daily_care
+        
+        local response, err = neo4j_api.query(query_utils.add(data), data)
+
+        if err then
+            return print('Não foi possível adicionar a planta a base de dados. Erro: '..err)
+        end
+        print(plant..' adicionado(a) com sucesso')
+    end)
 
 cli:parse(arg)
