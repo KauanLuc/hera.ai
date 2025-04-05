@@ -1,3 +1,8 @@
+![image](https://img.shields.io/badge/Lua-2C2D72?style=for-the-badge&logo=lua&logoColor=white)
+![Ollama](https://img.shields.io/badge/Ollama-7C4DFF?style=for-the-badge&logo=ollama&logoColor=white)
+![Neo4j](https://img.shields.io/badge/Neo4j-018bff?style=for-the-badge&logo=neo4j&logoColor=white)
+![AI Gardening Assistant](https://img.shields.io/badge/AI%20Gardening%20Assistant-4CAF50?style=for-the-badge&logo=leaf&logoColor=white)
+![GitHub repo size](https://img.shields.io/github/repo-size/KauanLuc/hera.ai?style=for-the-badge)
 # 🌿 Hera - Sua Assistente de Jardinagem com IA
 
 Obtenha respostas inteligentes para todas suas dúvidas sobre plantas, flores e jardinagem!
