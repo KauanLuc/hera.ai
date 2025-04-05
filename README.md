@@ -18,20 +18,54 @@ hera -p "Quais plantas são boas para apartamento?"
 hera -p "Como tratar pragas em hortaliças?"
 ```
 
-### ⏳ O que acontece?
+**⏳ O que acontece?**
 1. Hera mostrará: 🤖 Analisando questão... (Pode levar alguns instantes)
 2. Em segundos, você receberá uma resposta completa e especializada
 
-## 🌟 Dicas para Melhores Respostas
+**🌟 Dicas para Melhores Respostas:**
 - Use aspas nas perguntas
 - Seja específico em suas perguntas
 - Inclua detalhes como tipo de planta, ambiente, sintomas (se aplicável)
 
-## 📚 Tipos de Perguntas que Hera Pode Responder
+**📚 Tipos de Perguntas que Hera Pode Responder:**
 - ✅ Cuidados com rega e solo
 - ✅ Solução de problemas (folhas amarelas, pragas, etc.)
 - ✅ Melhores plantas para cada ambiente
 - ✅ Dicas de cultivo e poda
+
+### 💾 Adicionar uma nova planta ao banco de dados
+
+Para adicionar informações sobre uma nova planta, digite no terminal e presione `Enter`:
+```bash
+hera add nome_da_planta
+```
+
+**📝 O que acontece?**
+1. Hera irá guiá-lo através de um questionário interativo para coletar:
+ - Contexto de cultivo (onde a planta vive)
+ - Seus cuidados diários com a planta
+ - Problemas que sua planta possui
+2. Você poderá adicionar múltiplos problemas (digite `/sair` para finalizar)
+3. Todos os dados serão salvos no banco de dados Neo4j para serem usadas para responder futuras perguntas
+
+Exemplo prático:
+```
+hera add Manjericão
+> 🤖 Digite qual o contexto que o(a) manjericão vive: 
+Quintal, luz do sol direta
+> 🤖 Digite quais são os cuidados diários com o(a) manjericão: 
+6 horas de sol por dia, vaso com drenagem, rega de 2 em 2 dias, poda 1x ao mês, adubação de 3 em 3 meses
+> 🤖 Digite quais problemas o(a) manjericão tem: 
+Folhas murchas
+Folhas amareladas
+Galhos pensos
+/sair
+🤖 manjericão adicionado(a) com sucesso
+```
+
+**💡 Dicas para melhor cadastro:**
+- Seja específico nos cuidados e contexto
+- Liste todos os problemas que sua planta possui
 
 ## 🔧 Requisitos para Testar a Versão de Desenvolvimento
 **🌱 Hera está em desenvolvimento constante para te ajudar cada vez melhor!**
