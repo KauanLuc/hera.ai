@@ -12,7 +12,7 @@ local cli = Lummander.new{
     author = 'KauanLuc <https://github.com/KauanLuc>'
 }
 
-cli:command('-p <prompt>', 'Faça uma pergunta sobre flora para a Hera')
+cli:command('prom <prompt>', 'Faça uma pergunta sobre flora para a Hera')
     :action(function(parsed, command, app)
         print('🤖 Analisando questão... (Pode levar alguns instantes)')
 
@@ -24,10 +24,10 @@ cli:command('-p <prompt>', 'Faça uma pergunta sobre flora para a Hera')
         print(response)
     end)
 
-cli:command('add <plant_name>', cli_utils.add_description())
+cli:command('add <nome_da_planta>', cli_utils.add_description())
     :action(function(parsed, command, app)
         local data = {}
-        local plant = string.lower(parsed.plant_name)
+        local plant = string.lower(parsed.nome_da_planta)
 
         print('Digite qual o contexto que o(a) '..plant..' vive: (Ex: Apartamento, luz difusa indireta etc)')
         local context = string.lower(io.read())
