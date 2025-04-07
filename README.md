@@ -13,14 +13,14 @@ Obtenha respostas inteligentes para todas suas dúvidas sobre plantas, flores e 
 
 Digite no terminal:
 ```bash
-hera -p "sua pergunta sobre plantas aqui"
+hera prom "sua pergunta sobre plantas aqui"
 ```
 
 Exemplos práticos:
 ```bash
-hera -p "Como regar rosas corretamente?"
-hera -p "Quais plantas são boas para apartamento?"
-hera -p "Como tratar pragas em hortaliças?"
+hera prom "Como regar rosas corretamente?"
+hera prom "Quais plantas são boas para apartamento?"
+hera prom "Como tratar pragas em hortaliças?"
 ```
 
 **⏳ O que acontece?**
