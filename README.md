@@ -88,7 +88,7 @@ luarocks build --only-deps
 ```
 3. Teste Hera com:
 ```bash
-lua src/main.lua -p "sua pergunta sobre flora aqui"
+lua src/main.lua prom "sua pergunta sobre flora aqui"
 ```
 
 ## 🐳 Containerização
