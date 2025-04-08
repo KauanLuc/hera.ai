@@ -2,6 +2,7 @@ local ollama_api = require 'src.api.ollama-api'
 local neo4j_api = require 'src.api.neo4j-api'
 local query_utils = require 'src.utils.query-utils'
 local cli_utils = require 'src.utils.cli-utils'
+local markdown = require 'markdown'
 local Lummander = require 'lummander'
 
 local cli = Lummander.new{
@@ -12,7 +13,7 @@ local cli = Lummander.new{
     author = 'KauanLuc <https://github.com/KauanLuc>'
 }
 
-cli:command('prom <prompt>', 'Faça uma pergunta sobre flora para a Hera')
+cli:command('prom <prompt> [resposta_em_arquivo_html]', 'Faça uma pergunta sobre flora para a Hera')
     :action(function(parsed, command, app)
         print('🤖 Analisando questão... (Pode levar alguns instantes)')
 
@@ -21,6 +22,22 @@ cli:command('prom <prompt>', 'Faça uma pergunta sobre flora para a Hera')
         if err then
             return error(err)
         end
+
+        if parsed.resposta_em_arquivo_html then
+            local full_response = string.format([[**Sua Pergunta**: %s
+
+            %s
+            ]], parsed.prompt, response)
+            local response_as_html = markdown(full_response)
+            local save_as_html = cli_utils.save_as_html(response_as_html)
+            local response_was_saved = os.execute(save_as_html)
+
+            if response_was_saved == false then
+                return print('Não foi possível salvar a resposta como html')
+            end
+            return print('Resposta da Hera salva com sucesso')
+        end
+
         print(response)
     end)
 
