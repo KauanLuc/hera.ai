@@ -15,17 +15,26 @@ Digite no terminal:
 ```bash
 hera prom "sua pergunta sobre plantas aqui"
 ```
+ou
+```bash
+hera prom "sua pergunta sobre plantas aqui" html
+```
 
 Exemplos práticos:
 ```bash
 hera prom "Como regar rosas corretamente?"
 hera prom "Quais plantas são boas para apartamento?"
-hera prom "Como tratar pragas em hortaliças?"
+hera prom "Como tratar pragas em hortaliças?" html
 ```
 
 **⏳ O que acontece?**
 1. Hera mostrará: 🤖 Analisando questão... (Pode levar alguns instantes)
 2. Em segundos, você receberá uma resposta completa e especializada
+> Caso você tenha passado como parâmetro a flag `html` a resposta é convertida para formato HTML com:
+> 
+> Sua pergunta original destacada e Resposta formatada com marcação adequada
+>
+> Um arquivo `response-hera-data-atual.html` é criado no diretório atual
 
 **🌟 Dicas para Melhores Respostas:**
 - Use aspas nas perguntas
