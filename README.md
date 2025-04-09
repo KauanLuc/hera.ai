@@ -81,10 +81,10 @@ Galhos pensos
 - Seja específico nos cuidados e contexto
 - Liste todos os problemas que sua planta possui
 
-## 🔧 Requisitos para Testar a Versão de Desenvolvimento
+## 🔧 Requisitos para Testar e Contribuir com a Versão de Desenvolvimento
 **🌱 Hera está em desenvolvimento constante para te ajudar cada vez melhor!**
 
-Atualmente a aplicação só roda como modo desenvolvimento. Para testar a Hera em fase de desenvolvimento, você precisará:
+Para testar e contribuir para a Hera em fase de desenvolvimento, você precisará:
 1. [Lua 5.3](https://www.lua.org/) instalado em seu sistema
 2. [Ollama](https://ollama.com/) instalado e configurado
 3. [Neo4j](https://neo4j.com/) instalado e rodando
