@@ -6,7 +6,7 @@ end
 
 function cli_utils.save_as_html(text)
     local current_date = os.date('%d-%m-%Y-%H-%M-%S')
-    return 'echo "'..text..'" > resposta-hera-'..current_date..'.html'
+    return 'echo "'..text..'" > resposta-hera-'..current_date..'.html', 'response-hera-'..current_date..'.html'
 end
 
 return cli_utils
