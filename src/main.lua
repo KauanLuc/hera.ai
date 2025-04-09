@@ -29,13 +29,13 @@ cli:command('prom <prompt> [resposta_em_arquivo_html]', 'Faça uma pergunta sobr
             %s
             ]], parsed.prompt, response)
             local response_as_html = markdown(full_response)
-            local save_as_html = cli_utils.save_as_html(response_as_html)
+            local save_as_html, filename = cli_utils.save_as_html(response_as_html)
             local response_was_saved = os.execute(save_as_html)
 
             if response_was_saved == false then
                 return print('Não foi possível salvar a resposta como html')
             end
-            return print('Resposta da Hera salva com sucesso')
+            return print('Resposta da Hera salva com sucesso. Nome do arquivo: '..filename)
         end
 
         print(response)
