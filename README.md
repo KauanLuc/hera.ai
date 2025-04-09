@@ -86,7 +86,7 @@ Galhos pensos
 
 Atualmente a aplicação só roda como modo desenvolvimento. Para testar a Hera em fase de desenvolvimento, você precisará:
 1. [Lua 5.3](https://www.lua.org/) instalado em seu sistema
-2. [Ollama](https://ollama.com/) instalado e configurado com o modelo [gemma3:1b](https://ollama.com/library/gemma3:1b)
+2. [Ollama](https://ollama.com/) instalado e configurado
 3. [Neo4j](https://neo4j.com/) instalado e rodando
 
 Passos para configuração:
@@ -95,7 +95,13 @@ Passos para configuração:
 ```bash
 luarocks build --only-deps
 ```
-3. Teste Hera com:
+3. Crie um arquivo `.env` e defina as variáveis de ambiente. Ex:
+```dotenv
+NEO4J_PRINCIPAL=neo4j
+NEO4J_CREDENTIAL=sua_senha_neo4j
+OLLAMA_MODEL=gemma3:1b # ou qualquer outro modelo
+```
+4. Teste Hera com:
 ```bash
 lua src/main.lua prom "sua pergunta sobre flora aqui"
 ```
