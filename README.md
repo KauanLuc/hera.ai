@@ -17,14 +17,14 @@ hera prom "sua pergunta sobre plantas aqui"
 ```
 ou
 ```bash
-hera prom "sua pergunta sobre plantas aqui" html
+hera prom --html "sua pergunta sobre plantas aqui"
 ```
 
 Exemplos práticos:
 ```bash
 hera prom "Como regar rosas corretamente?"
 hera prom "Quais plantas são boas para apartamento?"
-hera prom "Como tratar pragas em hortaliças?" html
+hera prom --html "Como tratar pragas em hortaliças?"
 ```
 
 **⏳ O que acontece?**
@@ -51,31 +51,40 @@ hera prom "Como tratar pragas em hortaliças?" html
 
 Para adicionar informações sobre uma nova planta, digite no terminal e presione `Enter`:
 ```bash
-hera add nome_da_planta
+hera add "nome da planta"
+```
+ou
+```bash
+hera add -c "contexto que a planta vive" -d "seus cuidados diários com a planta" -p "problema da sua planta 1" -p "problema 2" ... "nome da planta"
+# ou mesmo
+hera add --contexto "contexto que a planta vive" --cuidados-diarios "seus cuidados diários com a planta" --problema "problema da sua planta 1" --problema "problema 2" ... "nome da planta"
+```
+
+**📌 Você pode adicionar quantos problemas quiser! Basta usar múltiplas flags -p ou --problema.**
+
+Exemplos práticos:
+```bash
+# Modo interativo (a Hera perguntará cada informação)
+hera add "Suculenta"
+
+# Modo direto com múltiplos problemas
+hera add -c "Varanda ensolarada" -d "Rega a cada 15 dias" \
+         -p "Folhas murchas" \
+         -p "Manchas brancas" \
+         -p "Crescimento lento" \
+         "Cacto"
 ```
 
 **📝 O que acontece?**
-1. Hera irá guiá-lo através de um questionário interativo para coletar:
+1. Caso você tenha passado apenas o nome da planta, a Hera irá guiá-lo através de um questionário interativo para coletar:
  - Contexto de cultivo (onde a planta vive)
  - Seus cuidados diários com a planta
  - Problemas que sua planta possui
 2. Você poderá adicionar múltiplos problemas (digite `/sair` para finalizar)
 3. Todos os dados serão salvos no banco de dados Neo4j para serem usadas para responder futuras perguntas
-
-Exemplo prático:
-```
-hera add Manjericão
-> 🤖 Digite qual o contexto que o(a) manjericão vive: 
-Quintal, luz do sol direta
-> 🤖 Digite quais são os cuidados diários com o(a) manjericão: 
-6 horas de sol por dia, vaso com drenagem, rega de 2 em 2 dias, poda 1x ao mês, adubação de 3 em 3 meses
-> 🤖 Digite quais problemas o(a) manjericão tem: 
-Folhas murchas
-Folhas amareladas
-Galhos pensos
-/sair
-🤖 manjericão adicionado(a) com sucesso
-```
+> [!NOTE]
+> Caso contrário, os dados serão salvos com os valores das flags diretamente no banco de dados.
+> Se você não passar alguma das flags a aplicação identifica automaticamente e te pergunta, de forma interativa, o valor daquela flag
 
 **💡 Dicas para melhor cadastro:**
 - Seja específico nos cuidados e contexto
