@@ -9,7 +9,7 @@ description = {
 }
 dependencies = {
    "luasocket == 3.1.0-1",
-   "lummander == 0.1.0-2",
+   "argparse == 0.7.1-1",
    "bolt == 1.2-1",
    "dkjson == 2.8-1",
    "lua-dotenv == 1.0-2",

@@ -1,77 +1,24 @@
-local ollama_api = require 'src.api.ollama-api'
-local neo4j_api = require 'src.api.neo4j-api'
-local query_utils = require 'src.utils.query-utils'
+local argparse = require 'argparse'
+local prom_service = require 'src.services.prom-service'
+local add_service = require 'src.services.add-service'
 local cli_utils = require 'src.utils.cli-utils'
-local markdown = require 'markdown'
-local Lummander = require 'lummander'
 
-local cli = Lummander.new{
-    title = 'Hera - Sua jardineira virtual com IA',
-    tag = 'hera',
-    description = 'Obtenha conhecimentos, dicas, truques e salve-os com uma IA jardineira focada completamente em flora.',
-    version = 'dev-1',
-    author = 'KauanLuc <https://github.com/KauanLuc>'
+local hera = argparse(){
+    name = 'hera',
+    description = 'IA jardineira especializada em flora',
+    epilog = 'Para mais informações e para contribuição, veja <https://github.com/KauanLuc/hera.ai>'
 }
 
-cli:command('prom <prompt> [resposta_em_arquivo_html]', 'Faça uma pergunta sobre flora para a Hera')
-    :action(function(parsed, command, app)
-        print('🤖 Analisando questão... (Pode levar alguns instantes)')
+local prom = hera:command('prom', 'Faça uma pergunta sobre flora para a Hera')
+prom:argument('prompt', 'Pergunta ou dica a ser respondida pela Hera')
+prom:flag('--html', 'Imprime a resposta em um arquivo HTML')
+prom:action(function(args) prom_service.prom(args) end)
 
-        local status, response, err = ollama_api.gen(parsed.prompt)
-        print('status code: '..status)
-        if err then
-            return error(err)
-        end
+local add = hera:command('add', cli_utils.add_description())
+add:argument('planta', 'Planta a ser adiciona ao banco de dados')
+add:option('-c --contexto', 'Contexto na qual a planta vive')
+add:option('-d --cuidados-diarios', 'Seus cuidados diários com a planta')
+add:option('-p --problema', 'Problemas que sua planta possui'):count('*')
+add:action(function(args) add_service.add(args) end)
 
-        if parsed.resposta_em_arquivo_html then
-            local full_response = string.format([[**Sua Pergunta**: %s
-
-            %s
-            ]], parsed.prompt, response)
-            local response_as_html = markdown(full_response)
-            local save_as_html, filename = cli_utils.save_as_html(response_as_html)
-            local response_was_saved = os.execute(save_as_html)
-
-            if response_was_saved == false then
-                return print('Não foi possível salvar a resposta como html')
-            end
-            return print('Resposta da Hera salva com sucesso. Nome do arquivo: '..filename)
-        end
-
-        print(response)
-    end)
-
-cli:command('add <nome_da_planta>', cli_utils.add_description())
-    :action(function(parsed, command, app)
-        local data = {}
-        local plant = string.lower(parsed.nome_da_planta)
-
-        print('Digite qual o contexto que o(a) '..plant..' vive: (Ex: Apartamento, luz difusa indireta etc)')
-        local context = string.lower(io.read())
-
-        print('Digite quais são os cuidados diários com o(a) '..plant..': (Ex: Rega 1x por dia, poda todo mês etc)')
-        local daily_care = string.lower(io.read())
-        
-        print('Digite quais problemas o(a) '..plant..' tem: (Digite "/sair" para finalizar)')
-        while true do
-            local problem = string.lower(io.read())
-            if problem == '/sair' then
-                break
-            end
-
-            table.insert(data, problem)
-        end
-        
-        data.name = plant
-        data.context = context
-        data.daily_care = daily_care
-        
-        local response, err = neo4j_api.query(query_utils.add(data), data)
-
-        if err then
-            return print('Não foi possível adicionar a planta a base de dados. Erro: '..err)
-        end
-        print(plant..' adicionado(a) com sucesso')
-    end)
-
-cli:parse(arg)
+local args = hera:parse()
