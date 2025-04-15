@@ -8,9 +8,12 @@ function prom.prom(data)
     print('🤖 Analisando questão... (Pode levar alguns instantes)')
 
     local status, response, err = ollama_api.gen(data.prompt)
-    print('status code: '..status)
     if err then
         return error(err)
+    end
+
+    if status ~= 200 then
+        return
     end
 
     if data.html then
