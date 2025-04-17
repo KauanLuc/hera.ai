@@ -13,4 +13,8 @@ function query_utils.add(data)
     return query
 end
 
+function query_utils.problems()
+    return 'MATCH (plant:Plant {name: $name})-[:HAS_PROBLEM]->(problem:Problem) RETURN plant.name, plant.context, plant.daily_care, problem.name'
+end
+
 return query_utils
