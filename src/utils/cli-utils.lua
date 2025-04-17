@@ -9,4 +9,8 @@ function cli_utils.save_as_html(text)
     return 'echo "'..text..'" > resposta-hera-'..current_date..'.html', 'response-hera-'..current_date..'.html'
 end
 
+function cli_utils.troubleshoot_description()
+    return 'Hera te dá as dicas mais comuns para resolver os problemas da sua planta, com base no contexto e nos cuidados diários específicos '
+end
+
 return cli_utils
