@@ -90,6 +90,28 @@ hera add -c "Varanda ensolarada" -d "Rega a cada 15 dias" \
 - Seja específico nos cuidados e contexto
 - Liste todos os problemas que sua planta possui
 
+### 🛠 Solucionar problemas de uma planta específica
+
+Para obter soluções personalizadas para os problemas de uma planta cadastrada, digite:
+```bash
+hera solucionar "nome da planta"
+```
+Exemplo prático:
+```bash
+hera solucionar "Orquídea"
+```
+
+**🌱 O que acontece?**
+1. Hera buscará no banco de dados todos os problemas registrados para a planta especificada
+2. Em seguida, fornecerá um diagnóstico completo com:
+- Possíveis causas dos problemas
+- Soluções recomendadas
+- Cuidados preventivos
+
+**💡 Dicas para melhores resultados:**
+- Certifique-se que a planta já foi cadastrada previamente com `hera add`
+- Para plantas com muitos problemas, a análise pode ser mais demorada
+
 ## 🔧 Requisitos para Testar e Contribuir com a Versão de Desenvolvimento
 **🌱 Hera está em desenvolvimento constante para te ajudar cada vez melhor!**
 
